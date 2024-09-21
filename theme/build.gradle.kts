@@ -1,7 +1,7 @@
 import vn.finance.src.Configs
 
 plugins {
-    alias(mobilex.plugins.androidApplication)
+    alias(mobilex.plugins.androidLibrary)
     alias(mobilex.plugins.kotlinAndroid)
     `maven-publish`
 }
@@ -44,7 +44,10 @@ publishing {
         }
     }
     publications {
-        create<MavenPublication>("mavenJava") {
+        create<MavenPublication>("mavenAndroid") {
+            afterEvaluate {
+                from(components["release"])
+            }
             groupId = "vn.finance.libs"
             artifactId = "ui-theme"
             version = "1.0.0" // Set your desired version here
