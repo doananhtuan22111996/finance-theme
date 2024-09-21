@@ -46,7 +46,7 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             groupId = "vn.finance.libs"
-            artifactId = "theme"
+            artifactId = "ui-theme"
             version = "1.0.0" // Set your desired version here
         }
     }
