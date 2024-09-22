@@ -50,7 +50,7 @@ publishing {
             }
             groupId = "vn.finance.libs"
             artifactId = "ui-theme"
-            version = "1.0.0" // Set your desired version here
+            version = "1.0.1" // Set your desired version here
         }
     }
 }
