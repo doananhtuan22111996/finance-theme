@@ -28,11 +28,18 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Configs.kotlinCompilerExtensionVersion
     }
+    publishing {
+        multipleVariants("all") {
+            allVariants()
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 publishing {
-    val ghUsername = System.getenv("USERNAME")
-    val ghPassword = System.getenv("TOKEN")
+    val ghUsername = System.getenv("GH_USERNAME")
+    val ghPassword = System.getenv("GH_TOKEN")
     repositories {
         maven {
             name = "GitHubPackages"
@@ -46,11 +53,11 @@ publishing {
     publications {
         create<MavenPublication>("mavenAndroid") {
             afterEvaluate {
-                from(components["release"])
+                from(components["all"])
             }
             groupId = "vn.finance.libs"
-            artifactId = "ui-theme"
-            version = "1.0.1" // Set your desired version here
+            artifactId = "theme"
+            version = "1.0.0" // Set your desired version here
         }
     }
 }
