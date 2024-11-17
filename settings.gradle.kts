@@ -20,7 +20,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven {
             val ghUsername = System.getenv("GH_USERNAME") ?: getLocalProperty("GH_USERNAME")
-            val ghPassword = System.getenv("GH_USERNAME") ?: getLocalProperty("GH_USERNAME")
+            val ghPassword = System.getenv("GH_TOKEN") ?: getLocalProperty("GH_TOKEN")
             url = uri("https://maven.pkg.github.com/${ghUsername}/REPOSITORY")
             credentials {
                 username = ghUsername
