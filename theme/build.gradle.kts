@@ -1,70 +1,24 @@
 import vn.finance.src.Configs
 
 plugins {
-    alias(mobilex.plugins.androidLibrary)
-    alias(mobilex.plugins.kotlinAndroid)
-    `maven-publish`
+    vn.core.plugins.androidLibrary
+    vn.core.plugins.androidCompose
+    vn.core.plugins.androidPublishing
 }
 
 android {
-    namespace = Configs.namespace
-    compileSdk = Configs.compileSdk
-
-    defaultConfig {
-        minSdk = Configs.minSdk
-    }
-
-    compileOptions {
-        sourceCompatibility = Configs.javaVersion
-        targetCompatibility = Configs.javaVersion
-    }
-    kotlinOptions {
-        jvmTarget = Configs.jvmTarget
-    }
-
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Configs.kotlinCompilerExtensionVersion
-    }
-    publishing {
-        multipleVariants("all") {
-            allVariants()
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
+    namespace = Configs.NAME_SPACE
 }
 
 publishing {
-    val ghUsername = System.getenv("GH_USERNAME")
-    val ghPassword = System.getenv("GH_TOKEN")
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("${Configs.mavenDomain}/${ghUsername}/finance-theme")
-            credentials {
-                username = ghUsername
-                password = ghPassword
-            }
-        }
-    }
     publications {
-        create<MavenPublication>("mavenAndroid") {
+        create<MavenPublication>(Configs.Artifact.ARTIFACT_ID) {
             afterEvaluate {
                 from(components["all"])
             }
-            groupId = "vn.finance.libs"
-            artifactId = "theme"
-            version = "1.0.0" // Set your desired version here
+            groupId = Configs.Artifact.GROUP_ID // Replace with your GitHub username
+            artifactId = Configs.Artifact.ARTIFACT_ID
+            version = Configs.Artifact.VERSION // Set your desired version here
         }
     }
-}
-
-dependencies {
-    implementation(mobilex.androidxCoreKtx)
-    implementation(mobilex.androidxComposeUi)
-    implementation(mobilex.androidxComposeMaterial3Android)
-    implementation(mobilex.androidxComposeUiTextGoogleFonts)
 }
