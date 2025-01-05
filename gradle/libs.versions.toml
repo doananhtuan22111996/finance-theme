@@ -1,5 +1,5 @@
 [versions]
-corePlugins = "1.0.1"
+corePlugins = "1.0.2"
 
 [libraries]
 corePlugins = { group = "vn.core.libs", name = "plugins", version.ref = "corePlugins" }
